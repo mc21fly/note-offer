@@ -1,0 +1,138 @@
+.list-wrapper::-webkit-scrollbar {
+    width: 4px;
+}
+
+.list-wrapper::-webkit-scrollbar-thumb {
+    background-color: #e9f1f7;
+    border-radius: 3px;
+}
+
+.list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.list {
+    padding: 0;
+}
+
+.list.show > .list-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.list.show > .list-head::after {
+    font: var(--fa-font-solid);
+    content: "\f0d8";
+}
+
+.list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px 14px;
+}
+
+.list-head::after {
+    font: var(--fa-font-solid);
+    content: "\f0d7";
+}
+
+.list-head:hover {
+    background-color: #445f7c;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.list-title {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    line-height: 100%;
+}
+
+.list-items {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    margin-top: 6px;
+    padding: 0;
+    font-size: 13px;
+}
+
+.list-item {
+    position: relative;
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 3px 14px;
+    border-radius: 3px;
+    margin-bottom: 1px;
+}
+
+.list-item:last-of-type {
+    margin-bottom: 0;
+}
+
+.list-item:hover {
+    background-color: #445f7c;
+    cursor: pointer;
+}
+
+li[data-checked="true"]::before {
+    font: var(--fa-font-regular);
+    content: "\f14a";
+    font-size: 16px;
+    margin-right: 8px;
+    margin-top: 1px;
+}
+
+li[data-checked="false"]::before {
+    font: var(--fa-font-regular);
+    content: "\f0c8";
+    font-size: 16px;
+    margin-right: 8px;
+    margin-top: 1px;
+}
+
+.selected {
+    background-color: #2b3d50;
+}
+
+.list-item > input {
+    width: 100%;
+    border: 1px solid #2b3d50;
+    border-radius: 3px;
+    background-color: #131b23;
+    color: #e9f1f7;
+    text-transform: none;
+    font-weight: 400;
+    padding: 0px 6px;
+}
+
+.list-item > input::placeholder {
+    color: #a1a8ad;
+}
+
+.list-item > input:hover {
+    background-color: inherit;
+}
+
+.list-item:has(input:hover) {
+    background-color: inherit;
+}
+
+.input {
+    background-color: #131b23;
+    margin-bottom: 3px;
+}
+
+.input:hover {
+    background-color: #131b23;
+    cursor: default;
+}

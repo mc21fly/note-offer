@@ -1,0 +1,49 @@
+.dropdown-icon::after {
+    font: var(--fa-font-solid);
+    content: "\f0d7";
+}
+
+.profile-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f2bd";
+    margin-right: 14px;
+}
+
+.info-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f05a";
+    margin-right: 14px;
+}
+
+.ok-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f00c";
+    margin-right: 14px;
+    color: #228b22;
+}
+
+.error-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f071";
+    margin-right: 14px;
+    color: #ffbf00;
+}
+
+.error-icon-l::before {
+    font: var(--fa-font-solid);
+    content: "\f071";
+    margin-left: 10px;
+    color: #ffbf00;
+}
+
+.refresh-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f021";
+    margin-right: 14px;
+}
+
+.context-icon::before {
+    font: var(--fa-font-solid);
+    content: "\f142";
+    margin-right: 14px;
+}

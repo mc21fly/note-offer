@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Szablony</title>
+        <link rel="icon" type="image/x-icon" href="./public/favicon.ico" />
+        <link rel="stylesheet" href="./public/styles/global.css" />
+        <script type="module" src="./public/scripts/script.js" defer></script>
+        <script src="https://kit.fontawesome.com/1ecf02b402.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="side">
+            <div class="dropdown">
+                <div class="button dropdown-icon">
+                    <span id="selected-profile" class="profile profile-icon">Wybierz profil</span>
+                </div>
+                <ul id="profiles" class="dropdown-menu"></ul>
+            </div>
+            <div class="list-wrapper"></div>
+        </div>
+        <div id="main">
+            <div id="top">
+                <div id="selected-template">Wybierz szablon</div>
+                <div id="copy" class="button">Skopiuj do schowka</div>
+            </div>
+            <div class="preview-wrapper">
+                <iframe id="preview" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div id="toasts"></div>
+    </body>
+</html>
