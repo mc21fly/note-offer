@@ -36,10 +36,6 @@ export default class AppController {
         this.view.displayTemplates(templates);
     };
 
-    onSelectedTemplateModifiersUpdate = (modifiers) => {
-        this.view.displayModifiers(modifiers);
-    };
-
     onNotify = (notification) => {
         this.view.notify(notification);
     };

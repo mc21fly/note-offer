@@ -169,27 +169,10 @@ export default class AppView {
         if (title) this.selected_template.innerText = title;
     }
 
-    displaySelectedTemplateModifiers(selected_template) {
-        const { modifiers } = selected_template;
-
-        if (this.modifiers_list) {
-            this.list_wrapper.removeChild(this.modifiers_list);
-            this.modifiers_list = undefined;
-        }
-
-        if (modifiers && modifiers.isNotEmpty()) {
-            const modifiers_list = createList("Modyfikatory", modifiers, () => {});
-
-            this.modifiers_list = modifiers_list;
-            this.list_wrapper.insertBefore(modifiers_list, this.templates_list.nextSibling);
-        }
-    }
-
     displayPreview(model) {
         const { selected_template, selected_profile } = model;
         this.displaySelectedProfile(selected_profile);
         this.displaySelectedTemplate(selected_template);
-        // this.displaySelectedTemplateModifiers(selected_template);
 
         this.scroll_value = this.iframe.contentWindow.scrollY;
         this.srcdoc = "";

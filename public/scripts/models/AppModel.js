@@ -118,12 +118,6 @@ export default class AppModel {
         this.onModelUpdate(this);
     }
 
-    updateSelectedTemplate(updated_template) {
-        this.selected_template = updated_template;
-
-        this.onModelUpdate(this);
-    }
-
     toggleShowTraining(training_index) {
         this.trainings[training_index].use = !this.trainings[training_index].use;
 
