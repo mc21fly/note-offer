@@ -23,38 +23,18 @@ export default class AppModel {
 
     async initialize() {
         this.loadTemplates();
-        if (this.selected_template.isEmpty()) this.selected_template = this.templates[0] || {};
+        this.selected_template = this.templates[0] || {};
 
         this.loadStoredData();
-        if (this.profiles.isEmpty()) await this.loadProfiles();
-        if (this.trainings.isEmpty()) await this.loadTrainings();
+        await this.loadProfiles();
+        await this.loadTrainings();
         if (this.selected_profile.isEmpty()) this.selected_profile = this.profiles[0] || {};
 
         this.onModelUpdate(this);
     }
 
     async loadStoredData() {
-        const stored_profiles = LocalStorageManager.read("profiles");
-        const stored_trainings = LocalStorageManager.read("trainings");
         const stored_selected_profile = LocalStorageManager.read("selected_profile");
-
-        if (stored_profiles) {
-            const { payload, iat } = stored_profiles;
-            const iat_date = formatDate(iat);
-
-            this.profiles = payload;
-            this.onNotify(new Notification("ok", "Profile wczytane poprawnie", `Data ostatniej aktualizacji: <b>${iat_date}</b>`));
-            this.onProfilesUpdate(payload);
-        }
-
-        if (stored_trainings) {
-            const { payload, iat } = stored_trainings;
-            const iat_date = formatDate(iat);
-
-            this.trainings = payload;
-            this.onNotify(new Notification("ok", "Szkolenia wczytane poprawnie", `Data ostatniej aktualizacji: <b>${iat_date}</b>`));
-            this.onTrainingsUpdate(payload);
-        }
 
         if (stored_selected_profile) {
             const { payload } = stored_selected_profile;
@@ -80,7 +60,6 @@ export default class AppModel {
             const fetched_profiles = await parseProfiles();
 
             this.profiles = fetched_profiles;
-            this.commit("profiles", fetched_profiles);
             this.onNotify(new Notification("ok", "Kontakty zaimportowane poprawnie", `Liczba kontaktów: ${fetched_profiles.length}`));
         } catch (e) {
             this.onNotify(new Notification("error", "Błąd podczas importu kontaktów"));
@@ -96,7 +75,6 @@ export default class AppModel {
 
             this.trainings = fetched_trainings;
             this.onNotify(new Notification("ok", "Szkolenia zaimportowane poprawnie", `Liczba szkoleń: ${fetched_trainings.length}`));
-            this.commit("trainings", fetched_trainings);
         } catch (e) {
             this.onNotify(new Notification("error", "Błąd podczas importu szkoleń"));
             this.trainings = [];
