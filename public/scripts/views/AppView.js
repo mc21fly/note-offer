@@ -31,7 +31,6 @@ export default class AppView {
         const button = this.dropdown.querySelector(".button");
 
         this.iframe.addEventListener("load", () => {
-            this.iframe.classList.add("show");
             this.iframe.contentWindow.scrollTo(0, this.scroll_value);
         });
 

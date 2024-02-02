@@ -36,6 +36,14 @@ export default function createList(title, items, handleReload, ctx_menu) {
 
         list_ctx_menu.appendChild(list_ctx_menu_items);
         list_title.appendChild(list_ctx_menu);
+
+        const handleClickOutside = (e) => {
+            if (e.target !== list_ctx_menu) {
+                list_ctx_menu.classList.remove("show");
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
     }
 
     list_head.appendChild(list_title);
