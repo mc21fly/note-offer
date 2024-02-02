@@ -1,20 +1,44 @@
-export default function createList(title, items, handleReload) {
+export default function createList(title, items, handleReload, ctx_menu) {
     const list = document.createElement("div");
+    const list_head = document.createElement("div");
+    const list_title = document.createElement("div");
+    const list_ctx_menu = ctx_menu ? document.createElement("div") : null;
+
     list.classList.add("list");
     list.classList.add("show");
 
-    const list_head = document.createElement("div");
     list_head.classList.add("list-head");
-    list_head.addEventListener("click", () => {
-        list.classList.toggle("show");
+    list_head.addEventListener("click", (e) => {
+        if (e.target === list_head || e.target === list_title) list.classList.toggle("show");
+        if (!list.classList.contains("show")) list_ctx_menu.classList.remove("show");
     });
 
-    const list_title = document.createElement("div");
     list_title.classList.add("list-title");
     list_title.innerText = title;
 
-    list_head.appendChild(list_title);
+    if (list_ctx_menu) {
+        list_ctx_menu.classList.add("list-ctx-menu");
 
+        list_ctx_menu.addEventListener("click", (e) => {
+            e.target.classList.toggle("show");
+        });
+
+        const list_ctx_menu_items = document.createElement("ul");
+        list_ctx_menu_items.classList.add("list-ctx-menu-items");
+
+        ctx_menu.forEach((item) => {
+            const list_ctx_menu_item = document.createElement("li");
+            list_ctx_menu_item.classList.add("list-ctx-menu-item");
+            list_ctx_menu_item.innerText = item.title;
+            list_ctx_menu_item.addEventListener("click", item.handler);
+            list_ctx_menu_items.appendChild(list_ctx_menu_item);
+        });
+
+        list_ctx_menu.appendChild(list_ctx_menu_items);
+        list_title.appendChild(list_ctx_menu);
+    }
+
+    list_head.appendChild(list_title);
     const list_items = document.createElement("ul");
     list_items.classList.add("list-items");
 
@@ -124,7 +148,7 @@ function createCheckBoxListItem(item, list_items) {
 
     list_item.classList.add("list-item");
     list_item.innerHTML = item.title;
-    list_item.setAttribute("data-checked", item.default_value);
+    list_item.setAttribute("data-checked", item.value);
 
     list_item.addEventListener("click", () => {
         item.value = !item.value;

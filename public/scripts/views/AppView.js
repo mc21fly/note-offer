@@ -19,6 +19,7 @@ export default class AppView {
         this.onChangeProfile;
         this.onChangeTemplate;
         this.onToggleShowTraining;
+        this.onSetShowTrainings;
         this.onReloadProfiles;
         this.onReloadTemplates;
         this.onReloadTrainings;
@@ -109,21 +110,35 @@ export default class AppView {
                 type: "checkbox",
                 value_type: "boolean",
                 default_value: true,
-                value: true,
+                value: training.use,
                 onToggle: (_, index) => {
                     this.onToggleShowTraining(index);
                 },
             };
         });
 
-        const trainings_list = createList("Szkolenia", list_items, onReload);
+        const trainings_list = createList("Szkolenia", list_items, onReload, [
+            {
+                title: "Odznacz wszystkie",
+                handler: () => {
+                    this.onSetShowTrainings(false);
+                },
+            },
+            {
+                title: "Zaznacz wszystkie",
+                handler: () => {
+                    this.onSetShowTrainings(true);
+                },
+            },
+        ]);
 
         if (this.trainings_list) {
             this.list_wrapper.replaceChild(trainings_list, this.trainings_list);
         } else {
-            this.trainings_list = trainings_list;
             this.list_wrapper.appendChild(trainings_list);
         }
+
+        this.trainings_list = trainings_list;
     }
 
     displayTemplates(templates) {
@@ -231,6 +246,10 @@ export default class AppView {
 
     bindToggleShowTraining(handler) {
         this.onToggleShowTraining = handler;
+    }
+
+    bindSetShowTrainings(handler) {
+        this.onSetShowTrainings = handler;
     }
 
     bindReloadProfiles(handler) {

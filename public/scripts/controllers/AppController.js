@@ -13,6 +13,7 @@ export default class AppController {
         this.view.bindChangeProfile(this.handleChangeSelectedProfile);
         this.view.bindChangeTemplate(this.handleChangeSelectedTemplate);
         this.view.bindToggleShowTraining(this.handleToggleShowTrainings);
+        this.view.bindSetShowTrainings(this.handleSetShowTrainings);
         this.view.bindReloadProfiles(this.handleReloadProfiles);
         this.view.bindReloadTemplates(this.handleReloadTemplates);
         this.view.bindReloadTrainings(this.handleReloadTrainings);
@@ -51,6 +52,10 @@ export default class AppController {
 
     handleToggleShowTrainings = (training_index) => {
         this.model.toggleShowTraining(training_index);
+    };
+
+    handleSetShowTrainings = (value) => {
+        this.model.setShowTrainings(value);
     };
 
     handleReloadProfiles = () => {

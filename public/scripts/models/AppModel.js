@@ -103,6 +103,19 @@ export default class AppModel {
         this.onModelUpdate(this);
     }
 
+    setShowTrainings(value) {
+        const trainings = [...this.trainings].map((training) => {
+            return {
+                ...training,
+                use: value,
+            };
+        });
+
+        this.trainings = trainings;
+        this.onTrainingsUpdate(this.trainings);
+        this.onModelUpdate(this);
+    }
+
     commit(key, value) {
         LocalStorageManager.write(key, value);
     }
