@@ -49,6 +49,10 @@
     cursor: pointer;
 }
 
+.list-head:has(.list-ctx-menu-items:hover) {
+    background-color: inherit;
+}
+
 .list-title {
     display: flex;
     flex-direction: row-reverse;
