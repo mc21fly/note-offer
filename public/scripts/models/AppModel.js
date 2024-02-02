@@ -1,8 +1,8 @@
-import formatDate from "../utils/formatDate.js";
 import parseProfiles from "../utils/parseProfiles.js";
 import parseTrainings from "../utils/parseTrainings.js";
 import StandardTemplate from "../templates/StandardTemplate.js";
 import KFSTemplate from "../templates/KFSTemplate.js";
+import EFSTemplate from "../templates/EFSTemplate.js";
 import LocalStorageManager from "../utils/LocalStorageManager.js";
 import Notification from "../utils/Notification.js";
 
@@ -45,6 +45,7 @@ export default class AppModel {
     async loadTemplates() {
         this.templates.push(new StandardTemplate());
         this.templates.push(new KFSTemplate());
+        this.templates.push(new EFSTemplate());
 
         this.onTemplatesUpdate(this.templates);
     }
