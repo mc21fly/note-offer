@@ -1,3 +1,5 @@
+import uuid from "../utils/uuid.js";
+
 export default function parseTrainings() {
     return new Promise(async (res, rej) => {
         try {
@@ -16,6 +18,7 @@ export default function parseTrainings() {
                     const { title: trainingTitle, href: trainingHref } = header.attributes;
                     const contents = training.getElementsByClassName("our-offer-box");
 
+                    trainingJSON.id = uuid();
                     trainingJSON.use = true;
                     trainingJSON.title = trainingTitle.value.toUpperCase().replaceAll("-", "&#8209;").replaceAll(" - ", " &#8209;&nbsp;");
                     trainingJSON.href = trainingHref.value;
@@ -45,6 +48,8 @@ export default function parseTrainings() {
                         }
 
                         return {
+                            id: uuid(),
+                            use: true,
                             type: stage_title ? "two-col" : "one-col",
                             title: stage_title
                                 ? stage_title.trim().replaceAll("-", "&#8209;").replaceAll(" - ", " &#8209;&nbsp;")

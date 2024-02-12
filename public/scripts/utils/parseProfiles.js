@@ -1,3 +1,5 @@
+import uuid from "../utils/uuid.js";
+
 export default function parseProfiles() {
     return new Promise(async (res, rej) => {
         try {
@@ -19,6 +21,7 @@ export default function parseProfiles() {
                             const phone = contact.getElementsByTagName("mark")[0].getElementsByTagName("a")[0].innerText;
                             const email = contact.getElementsByTagName("mark")[0].getElementsByTagName("a")[1].innerText;
 
+                            contactJSON.id = uuid();
                             contactJSON.title = contactTitle.trim();
                             contactJSON.name = contactName.slice(0, -5).trim();
                             contactJSON.phone = phone;
