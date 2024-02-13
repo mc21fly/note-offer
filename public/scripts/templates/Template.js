@@ -1,5 +1,8 @@
+import uuid from "../utils/uuid.js";
+
 export default class Template {
     constructor(title) {
+        this.id = uuid();
         this.title = title;
         this.source = "";
         this.srcdoc = "";
