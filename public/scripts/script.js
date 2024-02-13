@@ -1,11 +1,5 @@
 import "./utils/prototypes.js";
 
-import AppModel from "./models/AppModel.js";
-import AppView from "./views/AppView.js";
-import AppController from "./controllers/AppController.js";
-
-// new AppController(new AppModel(), new AppView());
-
 import ProfilesModel from "./models/ProfilesModel.js";
 import TemplatesModel from "./models/TemplatesModel.js";
 import TrainingsModel from "./models/TrainingsModel.js";
