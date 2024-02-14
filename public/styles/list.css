@@ -79,12 +79,51 @@
     margin-bottom: 1px;
 }
 
+.list-item::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    bottom: -1px;
+    width: 1px;
+    height: calc(100% - 18px);
+    background-color: grey;
+}
+
+.list-item:not([data-checked])::after {
+    content: "";
+    display: none;
+}
+
 .list-item-sub {
-    padding-left: 32px;
+    padding-left: 30px;
+}
+
+.list-item-sub::after {
+    line-height: 24px;
+    color: grey;
+    content: "—";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1px;
+    height: calc(100% + 1px);
+    background-color: grey;
 }
 
 .list-item-sub.last {
     margin-bottom: 10px;
+}
+
+.list-item-sub.last::after {
+    line-height: 28px;
+    color: grey;
+    content: "—";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 1px;
+    height: 14px;
+    background-color: grey;
 }
 
 .list-item:last-of-type {
