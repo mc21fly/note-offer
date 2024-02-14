@@ -344,9 +344,15 @@ export default class EFSTemplate extends Template {
         const generateStages = (stages, training_type) => {
             const generateOneColStages = (stages) => {
                 return stages.reduce((acc, stage, index, array) => {
-                    const isLast = index + 1 === array.length;
+                    const stage_index = array.filter((i) => i.use === true).indexOf(stage) + 1;
+                    const stagesToDisplay = array.filter((i) => i.use === true);
+                    const isLast = stage_index === stagesToDisplay.length;
                     const border = isLast ? "" : "border-bottom: 1px solid #c70000;";
                     const href = `https://www.centrumszkolen.notemaster.pl/${stage.href}`;
+
+                    if (!stage.use) {
+                        return (acc += "");
+                    }
 
                     return (acc += `
                     <tr>
@@ -359,9 +365,15 @@ export default class EFSTemplate extends Template {
 
             const generateTwoColStages = (stages) => {
                 return stages.reduce((acc, stage, index, array) => {
-                    const isLast = index + 1 === array.length;
+                    const stage_index = array.filter((i) => i.use === true).indexOf(stage) + 1;
+                    const stagesToDisplay = array.filter((i) => i.use === true);
+                    const isLast = stage_index === stagesToDisplay.length;
                     const border = isLast ? "" : "border-bottom: 1px solid #c70000;";
                     const href = `https://www.centrumszkolen.notemaster.pl/${stage.href}`;
+
+                    if (!stage.use) {
+                        return (acc += "");
+                    }
 
                     return (acc += `
                     <tr>
@@ -377,9 +389,15 @@ export default class EFSTemplate extends Template {
 
             const generateCombinedStages = (stages) => {
                 return stages.reduce((acc, stage, index, array) => {
-                    const isLast = index + 1 === array.length;
+                    const stage_index = array.filter((i) => i.use === true).indexOf(stage) + 1;
+                    const stagesToDisplay = array.filter((i) => i.use === true);
+                    const isLast = stage_index === stagesToDisplay.length;
                     const border = isLast ? "" : "border-bottom: 1px solid #c70000;";
                     const href = `https://www.centrumszkolen.notemaster.pl/${stage.href}`;
+
+                    if (!stage.use) {
+                        return (acc += "");
+                    }
 
                     if (stage.type === "one-col") {
                         return (acc += `

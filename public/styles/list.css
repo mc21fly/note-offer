@@ -79,6 +79,14 @@
     margin-bottom: 1px;
 }
 
+.list-item-sub {
+    padding-left: 32px;
+}
+
+.list-item-sub.last {
+    margin-bottom: 10px;
+}
+
 .list-item:last-of-type {
     margin-bottom: 0;
 }
@@ -102,6 +110,11 @@ li[data-checked="false"]::before {
     font-size: 16px;
     margin-right: 8px;
     margin-top: 1px;
+}
+
+li[data-disabled="true"] {
+    color: rgb(150, 150, 150);
+    pointer-events: none;
 }
 
 .selected {

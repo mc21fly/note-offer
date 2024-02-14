@@ -103,6 +103,12 @@ export default class AppModel {
         this.onModelUpdate(this);
     }
 
+    toggleShowStage(training_index, stage_index) {
+        this.trainings[training_index].stages[stage_index].use = !this.trainings[training_index].stages[stage_index].use;
+
+        this.onModelUpdate(this);
+    }
+
     setShowTrainings(value) {
         const trainings = [...this.trainings].map((training) => {
             return {

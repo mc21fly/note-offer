@@ -54,7 +54,7 @@ export default function createList(title, items, handleReload, ctx_menu) {
     list.appendChild(list_items);
 
     if (items?.length > 0) {
-        items.forEach((item) => {
+        items.forEach((item, index) => {
             switch (item.type) {
                 case "input":
                     const input_list_item = createInputListItem(item, list_items);
@@ -67,6 +67,9 @@ export default function createList(title, items, handleReload, ctx_menu) {
                 case "checkbox":
                     const checkbox_list_item = createCheckBoxListItem(item, list_items);
                     list_items.appendChild(checkbox_list_item);
+                    break;
+                case "checkbox-sub":
+                    createCheckBoxSubListItem(item, index, list_items);
                     break;
                 default:
                     const default_list_item = createDefaultListItem(item, list_items);
@@ -166,4 +169,50 @@ function createCheckBoxListItem(item, list_items) {
     });
 
     return list_item;
+}
+
+function createCheckBoxSubListItem(item, item_index, list_items) {
+    const list_item = document.createElement("li");
+    const listeneres = [];
+
+    list_item.classList.add("list-item");
+    list_item.innerHTML = item.title;
+    list_item.setAttribute("data-checked", item.value);
+
+    list_items.append(list_item);
+
+    item.sub.forEach((subItem, index, array) => {
+        const list_item_sub = document.createElement("li");
+
+        list_item_sub.classList.add("list-item");
+        list_item_sub.classList.add("list-item-sub");
+        if (index + 1 === array.length) list_item_sub.classList.add("last");
+        list_item_sub.innerHTML = subItem.title;
+        list_item_sub.setAttribute("data-checked", subItem.value);
+        list_item_sub.setAttribute("data-disabled", !item.value);
+
+        list_item_sub.addEventListener("click", () => {
+            subItem.value = !subItem.value;
+            list_item_sub.setAttribute("data-checked", subItem.value);
+
+            subItem.onToggleSub(list_item, item_index, index);
+        });
+
+        listeneres.push((value) => {
+            list_item_sub.setAttribute("data-disabled", !value);
+        });
+
+        list_items.append(list_item_sub);
+    });
+
+    list_item.addEventListener("click", () => {
+        item.value = !item.value;
+        list_item.setAttribute("data-checked", item.value);
+
+        item.onToggle(list_item, item_index, list_items.childNodes);
+
+        listeneres.forEach((listener) => {
+            listener(item.value);
+        });
+    });
 }

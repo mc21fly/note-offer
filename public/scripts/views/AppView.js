@@ -19,6 +19,7 @@ export default class AppView {
         this.onChangeProfile;
         this.onChangeTemplate;
         this.onToggleShowTraining;
+        this.onToggleShowStage;
         this.onSetShowTrainings;
         this.onReloadProfiles;
         this.onReloadTemplates;
@@ -106,10 +107,19 @@ export default class AppView {
         const list_items = trainings.map((training) => {
             return {
                 title: training.title,
-                type: "checkbox",
+                type: "checkbox-sub",
                 value_type: "boolean",
                 default_value: true,
                 value: training.use,
+                sub: training.stages.map((sub_item) => {
+                    return {
+                        title: sub_item.title,
+                        value: sub_item.use,
+                        onToggleSub: (_, item_index, sub_index) => {
+                            this.onToggleShowStage(item_index, sub_index);
+                        },
+                    };
+                }),
                 onToggle: (_, index) => {
                     this.onToggleShowTraining(index);
                 },
@@ -245,6 +255,10 @@ export default class AppView {
 
     bindToggleShowTraining(handler) {
         this.onToggleShowTraining = handler;
+    }
+
+    bindToggleShowStage(handler) {
+        this.onToggleShowStage = handler;
     }
 
     bindSetShowTrainings(handler) {
