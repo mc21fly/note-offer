@@ -122,6 +122,30 @@ export default class AppModel {
         this.onModelUpdate(this);
     }
 
+    setShowStages(value) {
+        const trainings = [...this.trainings].map((training) => {
+            if (training.use) {
+                return {
+                    ...training,
+                    stages: training.stages.map((stage) => {
+                        return {
+                            ...stage,
+                            use: value,
+                        };
+                    }),
+                };
+            } else {
+                return {
+                    ...training,
+                };
+            }
+        });
+
+        this.trainings = trainings;
+        this.onTrainingsUpdate(this.trainings);
+        this.onModelUpdate(this);
+    }
+
     commit(key, value) {
         LocalStorageManager.write(key, value);
     }

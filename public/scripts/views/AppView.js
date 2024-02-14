@@ -21,6 +21,7 @@ export default class AppView {
         this.onToggleShowTraining;
         this.onToggleShowStage;
         this.onSetShowTrainings;
+        this.onSetShowStages;
         this.onReloadProfiles;
         this.onReloadTemplates;
         this.onReloadTrainings;
@@ -137,6 +138,18 @@ export default class AppView {
                 title: "Zaznacz wszystkie",
                 handler: () => {
                     this.onSetShowTrainings(true);
+                },
+            },
+            {
+                title: "Odznacz wszystkie etapy",
+                handler: () => {
+                    this.onSetShowStages(false);
+                },
+            },
+            {
+                title: "Zaznacz wszystkie etapy",
+                handler: () => {
+                    this.onSetShowStages(true);
                 },
             },
         ]);
@@ -263,6 +276,10 @@ export default class AppView {
 
     bindSetShowTrainings(handler) {
         this.onSetShowTrainings = handler;
+    }
+
+    bindSetShowStages(handler) {
+        this.onSetShowStages = handler;
     }
 
     bindReloadProfiles(handler) {
