@@ -4,12 +4,14 @@
     "description": "",
     "source": "public/index.html",
     "scripts": {
-        "build": "parcel build --public-url ./dist/"
+        "clear-dist": "rimraf dist",
+        "build": "npm run clear-dist && parcel build --public-url ./dist/"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "parcel": "^2.11.0"
+        "parcel": "^2.11.0",
+        "rimraf": "^5.0.5"
     }
 }
