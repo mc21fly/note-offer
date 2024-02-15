@@ -1,3 +1,5 @@
+import EventListeners from "./EventListeners.js";
+
 export default function createList(title, items, handleReload, ctx_menu) {
     const list = document.createElement("div");
     const list_head = document.createElement("div");
@@ -57,23 +59,19 @@ export default function createList(title, items, handleReload, ctx_menu) {
         items.forEach((item, index) => {
             switch (item.type) {
                 case "input":
-                    const input_list_item = createInputListItem(item, list_items);
-                    list_items.appendChild(input_list_item);
+                    createInputListItem(item, list_items);
                     break;
                 case "single-select":
-                    const single_select_list_item = createSingleSelectListItem(item, list_items);
-                    list_items.appendChild(single_select_list_item);
+                    createSingleSelectListItem(item, list_items);
                     break;
                 case "checkbox":
-                    const checkbox_list_item = createCheckBoxListItem(item, list_items);
-                    list_items.appendChild(checkbox_list_item);
+                    createCheckBoxListItem(item, list_items);
                     break;
                 case "checkbox-sub":
                     createCheckBoxSubListItem(item, index, list_items);
                     break;
                 default:
-                    const default_list_item = createDefaultListItem(item, list_items);
-                    list_items.appendChild(default_list_item);
+                    createDefaultListItem(item, list_items);
                     break;
             }
         });
@@ -107,7 +105,7 @@ function createDefaultListItem(item, list_items) {
         item.onClick(list_item, list_item_index, list_items.childNodes);
     });
 
-    return list_item;
+    list_items.append(list_item);
 }
 
 function createInputListItem(item, list_items) {
@@ -125,7 +123,7 @@ function createInputListItem(item, list_items) {
         item.onChange();
     });
 
-    return list_item;
+    list_items.append(list_item);
 }
 
 function createSingleSelectListItem(item, list_items) {
@@ -150,7 +148,7 @@ function createSingleSelectListItem(item, list_items) {
         item.onClick(list_item, list_item_index, list_items.childNodes);
     });
 
-    return list_item;
+    list_items.append(list_item);
 }
 
 function createCheckBoxListItem(item, list_items) {
@@ -168,12 +166,12 @@ function createCheckBoxListItem(item, list_items) {
         item.onToggle(list_item, list_item_index, list_items.childNodes);
     });
 
-    return list_item;
+    list_items.append(list_item);
 }
 
 function createCheckBoxSubListItem(item, item_index, list_items) {
     const list_item = document.createElement("li");
-    const listeneres = [];
+    const events = new EventListeners();
 
     list_item.classList.add("list-item");
     list_item.innerHTML = item.title;
@@ -198,7 +196,7 @@ function createCheckBoxSubListItem(item, item_index, list_items) {
             subItem.onToggleSub(list_item, item_index, index);
         });
 
-        listeneres.push((value) => {
+        events.addEventListener("click", (value) => {
             list_item_sub.setAttribute("data-disabled", !value);
         });
 
@@ -211,8 +209,6 @@ function createCheckBoxSubListItem(item, item_index, list_items) {
 
         item.onToggle(list_item, item_index, list_items.childNodes);
 
-        listeneres.forEach((listener) => {
-            listener(item.value);
-        });
+        events.publish("click", item.value);
     });
 }
