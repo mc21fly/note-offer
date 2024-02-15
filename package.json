@@ -1,0 +1,15 @@
+{
+    "name": "note-offer",
+    "version": "1.0.0",
+    "description": "",
+    "source": "public/index.html",
+    "scripts": {
+        "build": "parcel build --public-url ./dist/"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "parcel": "^2.11.0"
+    }
+}

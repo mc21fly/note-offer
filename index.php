@@ -15,7 +15,7 @@ $router->get('/offers', function() {
     header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
     header("Pragma: no-cache"); // HTTP 1.0.
     header("Expires: 0"); // Proxies.
-    $homePage = file_get_contents('./public/index.html');
+    $homePage = file_get_contents('./dist/index.html');
     echo $homePage;
 });
 
