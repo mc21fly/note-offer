@@ -11,8 +11,14 @@ export default function createList(title, items, handleReload, ctx_menu) {
 
     list_head.classList.add("list-head");
     list_head.addEventListener("click", (e) => {
-        if (e.target === list_head || e.target === list_title) list.classList.toggle("show");
-        if (!list.classList.contains("show")) list_ctx_menu.classList.remove("show");
+        if (e.target === list_head || e.target === list_title) {
+            list.classList.toggle("show");
+            return;
+        }
+        if (!list.classList.contains("show")) {
+            list_ctx_menu.classList.remove("show");
+            return;
+        }
     });
 
     list_title.classList.add("list-title");
