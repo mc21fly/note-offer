@@ -3,6 +3,7 @@
 @import url("./list.css");
 @import url("./toasts.css");
 @import url("./dropdown.css");
+@import url("./valueeditor.css");
 
 body {
     background-color: #eaeaea;

@@ -37,7 +37,9 @@ export default class AppView {
         });
 
         this.copy_button.addEventListener("click", () => {
-            const compressed = compressHTML(this.srcdoc).trim();
+            const html = this.iframe.contentDocument.querySelector("html").outerHTML;
+            const compressed = compressHTML(`<!DOCTYPE html> ${html}`).trim();
+            // const compressed = compressHTML(this.srcdoc).trim();
 
             if (compressed) {
                 navigator.clipboard.writeText(compressed);
@@ -221,6 +223,55 @@ export default class AppView {
             this.iframe.contentDocument.open();
             this.iframe.contentDocument.write(rendered);
             this.iframe.contentDocument.close();
+
+            const editables = this.iframe.contentWindow.document.querySelectorAll("[data-editable]");
+            const editor = document.querySelector("#value-editor");
+            const editor_value = editor.querySelector("#value");
+            const editor_button_accept = editor.querySelector("#accept");
+            const editor_button_decline = editor.querySelector("#decline");
+
+            editables.forEach((editable) => {
+                const style = editable.getAttribute("style");
+
+                editable.addEventListener("mouseover", (e) => {
+                    e.currentTarget.setAttribute("style", `${style}background-color: lightblue; outline: solid lightblue; cursor:pointer;`);
+                });
+
+                editable.addEventListener("mouseleave", (e) => {
+                    e.target.setAttribute("style", style);
+                });
+
+                editable.addEventListener("click", (event) => {
+                    const startValue = event.target.innerText;
+                    editor.classList.add("show");
+                    editor_value.value = startValue;
+                    editor_value.select();
+
+                    function handleAccept() {
+                        event.target.innerText = editor_value.value;
+                        editor.classList.remove("show");
+                        editor_button_accept.removeEventListener("click", handleAccept);
+                        editor_button_decline.removeEventListener("click", handleDecline);
+                        editor_value.removeEventListener("keydown", handleKeydown);
+                    }
+
+                    function handleDecline() {
+                        editor.classList.remove("show");
+                        editor_button_accept.removeEventListener("click", handleAccept);
+                        editor_button_decline.removeEventListener("click", handleDecline);
+                        editor_value.removeEventListener("keydown", handleKeydown);
+                    }
+
+                    function handleKeydown(e) {
+                        if (e.key === "Enter") handleAccept();
+                        if (e.key === "Escape") handleDecline();
+                    }
+
+                    editor_button_accept.addEventListener("click", handleAccept);
+                    editor_button_decline.addEventListener("click", handleDecline);
+                    editor_value.addEventListener("keydown", handleKeydown);
+                });
+            });
         }
     }
 

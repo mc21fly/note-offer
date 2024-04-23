@@ -3,6 +3,7 @@ import parseTrainings from "../utils/parseTrainings.js";
 import StandardTemplate from "../templates/StandardTemplate.js";
 import KFSTemplate from "../templates/KFSTemplate.js";
 import EFSTemplate from "../templates/EFSTemplate.js";
+import DiscountTemplate from "../templates/DiscountTemplate.js";
 import LocalStorageManager from "../utils/LocalStorageManager.js";
 import Notification from "../utils/Notification.js";
 
@@ -46,6 +47,7 @@ export default class AppModel {
         this.templates.push(new StandardTemplate());
         this.templates.push(new KFSTemplate());
         this.templates.push(new EFSTemplate());
+        this.templates.push(new DiscountTemplate());
 
         this.onTemplatesUpdate(this.templates);
     }
