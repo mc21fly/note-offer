@@ -21,7 +21,7 @@ export default function parseTrainings() {
                     trainingJSON.id = uuid();
                     trainingJSON.use = true;
                     trainingJSON.title = trainingTitle.value.toUpperCase().replaceAll("-", "&#8209;").replaceAll(" - ", " &#8209;&nbsp;");
-                    trainingJSON.href = trainingHref.value;
+                    trainingJSON.href = trainingHref.value.replace("https://centrumszkolen.notemaster.pl/", "");
                     trainingJSON.type = undefined;
                     trainingJSON.stages = Array.from(contents).map((content) => {
                         const stage = content.getElementsByTagName("a")[0];
@@ -54,7 +54,7 @@ export default function parseTrainings() {
                             title: stage_title
                                 ? stage_title.trim().replaceAll("-", "&#8209;").replaceAll(" - ", " &#8209;&nbsp;")
                                 : stage_number.trim().replaceAll("-", "&#8209;").replaceAll(" - ", " &#8209;&nbsp;"),
-                            href: stageHref.value,
+                            href: stageHref.value.replace("https://centrumszkolen.notemaster.pl/", ""),
                         };
                     });
 
